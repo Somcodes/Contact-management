@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: parent(~{::#content}, ~{::title}, ~{::script})}">
+<head>
+    <title data-th-text="${loggedInUser.name}+' | SCM'">Profile Page</title>
+</head>
+<body>
+    <div id="content">
+
+        <!-- sidebar -->
+
+        <!-- is user is logged in : sidebar -->
+        <div th:if="${loggedInUser}">
+            <div th:replace="~{user/sidebar :: sidebar}"></div>
+        </div>
+        <div class="sm:pl-64 pt-16" style="height: 2000px;">
+            <div class="flex justify-center flex-col items-center">
+                <!-- profile card -->
+                <div class="w-[350px] md:w-[530px] mx-auto mt-16 bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="flex flex-col items-center p-6 bg-gray-100 dark:bg-gray-800 ">
+                      <img 
+                        class="w-48 h-48 rounded-full border-2 border-gray-300 object-cover"
+                        data-th-src="@{${loggedInUser.profilePic}}" 
+                        
+                        alt="Profile Picture"
+                      >
+                      <h2 class="mt-4 text-xl font-semibold text-gray-800 dark:text-gray-100" data-th-text="${loggedInUser.name}">John Doe</h2>
+                      <p class="text-gray-500 text-sm" data-th-text="${loggedInUser.email}">john.doe@example.com</p>
+                    </div>
+                    <div class="p-6 dark:bg-gray-700 dark:text-white">
+                      <div class="mb-4">
+                        <p class="text-sm text-gray-600 dark:text-white"><strong>About:</strong> <span class="dark:text-gray-200" data-th-text="${loggedInUser.about}"></span></p>
+                      </div>
+                      <div class="mb-4">
+                        <p class="text-sm text-gray-600 dark:text-white"><strong>Phone:</strong> <span th:text="${loggedInUser.phoneNumber==null ? '    ---' : loggedInUser.phoneNumber}"></span></p>
+                      </div>
+                      <div class="grid grid-cols-2 gap-4 text-sm text-gray-600">
+                        <p class="dark:text-white"><strong>Enabled:</strong> <span class="text-green-500">Yes</span></p>
+                        <p class="dark:text-white"><strong>Email Verified:</strong> <span class="text-green-500">Yes</span></p>
+                        <p class="dark:text-white"><strong>Phone Verified:</strong> <span th:classappend="${loggedInUser.phoneVerified ? 'text-green-500' : 'text-red-500'}" class="" th:text="${loggedInUser.phoneVerified ? 'Yes' : 'No'}">No</span></p>
+                        <p class="dark:text-white"><strong>Provider:</strong> <span th:text="${loggedInUser.provider}"></span></p>
+                      </div>
+                      
+                    </div>
+                  </div>
+                  
+            </div>
+        </div>
+    </div>
+    <script>
+        console.log("This is Profile page");
+    </script>
+</body>
+</html>

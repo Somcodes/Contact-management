@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: parent(~{::#content}, ~{::title}, ~{::script})}">
+
+<head>
+    <title>All Your Contacts</title>
+</head>
+
+<body>
+    <div id="content">
+
+        <!-- sidebar -->
+
+        <!-- is user is logged in : sidebar -->
+        <div th:if="${loggedInUser}">
+            <div th:replace="~{user/sidebar :: sidebar}"></div>
+        </div>
+        <div class="sm:pl-64 pt-16 mt-7">
+            <div class="grid grid-cols-12">
+                <div class="col-span-3 "></div>
+                <div class="col-span-12 md:col-span-5 ">
+                    <div
+                        class="card block  p-6 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-800">
+                        <div data-th-replace="~{message::messagebox}"></div>
+                        <h1 class="text-3xl font-bold text-center">Send Email</h1>
+                        <div data-th-replace="~{message::messagebox}"></div>
+                        <!-- <p class="text-gray-500">This contact will be stored on cloud, you can directly email the client -->
+                        <!-- from scm...</p> -->
+                        <form action="" class="mt-8" data-th-action="@{'/user/contacts/sendemail'}"
+                            data-th-object="${emailForm}" method="post" enctype="multipart/form-data">
+
+                            <!-- to input -->
+                            <div class="relative z-0 w-full mb-5 group">
+                                <input type="email" data-th-field="*{to}" id="floating_email"
+                                    class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                    placeholder=" " required />
+                                <label for="floating_email"
+                                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                                    To</label>
+                                <p data-th-if="${#fields.hasErrors('to')}" data-th-errors="*{to}"
+                                    class="text-red-600 py-2 px-1"></p>
+                            </div>
+
+                            <!-- subject input -->
+                            <div class="relative z-0 w-full mb-5 group">
+                                <input type="text" data-th-field="*{subject}" id="floating_email"
+                                    class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                    placeholder=" " required />
+                                <label for="floating_email"
+                                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                                    Subject</label>
+                                <p data-th-if="${#fields.hasErrors('subject')}" data-th-errors="*{subject}"
+                                    class="text-red-600 py-2 px-1"></p>
+                            </div>
+
+                            <!-- message input -->
+                            <div class="relative">
+                                <textarea 
+                                    type="text" 
+                                    data-th-field="*{message}" 
+                                    rows="15" 
+                                    id="floating_outlined"
+                                    class="peer block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600"
+                                    placeholder=" ">
+                                </textarea>
+                                <label 
+                                    for="floating_outlined"
+                                    class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 left-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 
+                                    peer-placeholder-shown:translate-y-1/2 peer-placeholder-shown:scale-100 peer-placeholder-shown:top-0 
+                                    peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
+                                    Message...
+                                </label>
+                            </div>
+                            
+                            <div>
+                                <!-- file input (attachment) -->
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                    for="default_size"></label>
+                                <input data-th-field="*{file}"
+                                    class="block w-full mb-5 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                    id="default_size" type="file">
+
+                            </div>
+
+
+                            <div class="button-container text-center mt-5">
+                                <button type="submit"
+                                    class="px-3 py-2 rounded bg-black dark:bg-blue-600 hover:dark:bg-blue-700 text-white">
+                                    Send
+                                </button>
+
+                                <button type="reset"
+                                    class="px-3 py-2 rounded bg-black dark:bg-blue-600 hover:dark:bg-blue-700 text-white">
+                                    Reset
+                                </button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div data-th-replace="~{user/contact_modals :: contact}"></div>
+
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@linways/table-to-excel@1.0.4/dist/tableToExcel.min.js"></script>
+    <script data-th-src="@{'/js/contacts.js'}"></script>
+    <script>
+        function exportData() {
+            const choosen = document.getElementById("export_select").value;
+            if (choosen === 'this_page_contact') {
+                TableToExcel.convert(document.getElementById("hidden_table"), {
+                    name: "contacts.xlsx",
+                    sheet: {
+                        name: "Sheet 1"
+                    }
+                });
+            } else {
+                TableToExcel.convert(document.getElementById("all_contacts_table"), {
+                    name: "all_contacts.xlsx",
+                    sheet: {
+                        name: "Sheet 1"
+                    }
+                })
+            }
+        }
+
+        function exportData2() {
+            const choosen = document.getElementById("export_select2").value;
+            if (choosen === 'this_page_contact') {
+                TableToExcel.convert(document.getElementById("hidden_table"), {
+                    name: "contacts.xlsx",
+                    sheet: {
+                        name: "Sheet 1"
+                    }
+                });
+            } else {
+                TableToExcel.convert(document.getElementById("all_contacts_table"), {
+                    name: "all_contacts.xlsx",
+                    sheet: {
+                        name: "Sheet 1"
+                    }
+                })
+            }
+        }
+
+    </script>
+</body>
+
+</html>

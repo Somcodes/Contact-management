@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: parent(~{::#content}, ~{::title}, ~{::script})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Contact Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const images = document.querySelectorAll('.carousel img');
+            const container = document.querySelector('.carousel-container');
+            let currentIndex = 0;
+            let direction = 1; // 1 for forward, -1 for reverse
+
+            const updateCarousel = () => {
+                container.style.transform = `translateX(-${currentIndex * 100}%)`;
+            };
+
+            const showNextImage = () => {
+                currentIndex += direction;
+
+                if (currentIndex === images.length - 1) {
+                    direction = -1; // Reverse direction at the last image
+                } else if (currentIndex === 0) {
+                    direction = 1; // Forward direction at the first image
+                }
+
+                updateCarousel();
+            };
+
+            setInterval(showNextImage, 2000); // Change image every 2 seconds
+        });
+    </script>
+</head>
+
+<body data-theme="light" class="font-sans scroll-smooth bg-gray-100 dark:bg-gray-800 dark:text-gray-200">
+    <script>
+        // Toggle theme functionality
+        const toggleTheme = () => {
+            const theme = document.body.getAttribute('data-theme');
+            document.body.setAttribute('data-theme', theme === 'light' ? 'dark' : 'light');
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            let currentIndex = 0;
+            const images = document.querySelectorAll('.carousel img');
+            const container = document.querySelector('.carousel-container');
+
+            const showNextImage = () => {
+                currentIndex = (currentIndex + 1) % images.length;
+                container.style.transform = `translateX(-${currentIndex * 100}%)`;
+            };
+
+            setInterval(showNextImage, 2000); // Change image every 2 seconds
+        });
+    </script>
+
+    <!-- Header Section -->
+    <header class="bg-blue-500 text-white py-6 px-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-3xl font-bold">Smart Contact Manager</h1>
+            <nav class="space-x-4">
+                <a href="#home" class="text-lg hover:underline">Home</a>
+                <a href="#about" class="text-lg hover:underline">About</a>
+                <a href="#services" class="text-lg hover:underline">Services</a>
+                <a href="#contact" class="text-lg hover:underline">Contact</a>
+            </nav>
+            <button onclick="toggleTheme()" class="ml-4 bg-white text-blue-500 py-2 px-4 rounded">Toggle Theme</button>
+        </div>
+    </header>
+
+    <div id="content">
+    <!-- Hero Section -->
+    <section id="home" class="bg-indigo-400 dark:bg-blue-900 text-white h-screen flex flex-col justify-center items-center">
+        <h1 class="text-5xl font-extrabold mb-6">Effortless Contact Management</h1>
+        <p class="text-xl mb-8">Organize your contacts seamlessly with Smart Contact Manager.</p>
+        
+        <!-- Carousel Section -->
+        <div class="carousel mt-8 overflow-hidden w-96 mx-auto relative">
+            <div class="carousel-container flex transform transition-transform duration-500">
+                <img src="https://th.bing.com/th/id/OIP.Ms-5772sbYROQwqqOONRVQHaEK?rs=1&pid=ImgDetMain" alt="Contact Manager 1" class="w-full">
+                <img src="https://www.pcrbusiness.com/wp-content/uploads/2020/10/Cloud-computing_October2.jpg" alt="Contact Manager 2" class="w-full">
+                <img src="https://www.reninnovation.com/wp-content/uploads/2020/12/contact_page_image_banner.jpg" alt="Contact Manager 3" class="w-full">
+                <img src="https://th.bing.com/th/id/OIP.uqUqlbPeNqAn8uYdNpOuoAHaET?rs=1&pid=ImgDetMain" alt="Contact Manager 4" class="w-full">
+                <img src="https://www.taylorintime.com/wp-content/uploads/2018/12/email-messaging.jpg" alt="Contact Manager 5" class="w-full">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    
+        <section id="about" class="py-16 px-4 dark:bg-indigo-600">
+            <div class="container mx-auto text-center">
+                <h2 class="text-4xl font-bold mb-6">About Us</h2>
+                <p class="text-lg leading-relaxed max-w-3xl mx-auto">
+                    Smart Contact Manager is designed to simplify how you organize and access your contacts. Whether for
+                    personal or professional use, our platform ensures that all your connections are easily accessible and
+                    well-structured. With a focus on user-friendliness and innovation, we aim to help you stay connected
+                    effortlessly.
+                </p>
+                <p class="text-lg leading-relaxed max-w-3xl mx-auto mt-4">
+                    From advanced sorting options to secure cloud storage, Smart Contact Manager evolves with your needs.
+                    Experience a new level of efficiency and reliability in managing your network.
+                </p>
+            </div>
+        </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 px-4 dark:bg-indigo-600">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-6">Our Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+                <div class="bg-gray-200 dark:bg-gray-700 p-6 rounded-lg shadow">
+                    <img src="https://via.placeholder.com/50" alt="Organization Icon" class="mx-auto mb-4">
+                    <h3 class="text-2xl font-semibold mb-4">Contact Organization</h3>
+                    <p>Effortlessly categorize and manage your contacts with smart grouping features that adapt to your
+                        preferences.</p>
+                </div>
+                <div class="bg-gray-200 dark:bg-gray-700 p-6 rounded-lg shadow">
+                    <i class="fa-solid fa-database mx-auto mb-4 text-5xl"></i>
+                    <!-- <img src="https://via.placeholder.com/50" alt="Security Icon" class="mx-auto mb-4"> -->
+                    <h3 class="text-2xl font-semibold mb-4">Secure Storage</h3>
+                    <p>Your data is protected with top-notch encryption, ensuring privacy and peace of mind at every
+                        step.</p>
+                </div>
+                <div class="bg-gray-200 dark:bg-gray-700 p-6 rounded-lg shadow">
+                    <img src="https://via.placeholder.com/50" alt="Sync Icon" class="mx-auto mb-4">
+                    <h3 class="text-2xl font-semibold mb-4">Cross-Platform Sync</h3>
+                    <p>Access your contacts anytime, anywhere with seamless real-time synchronization across all your
+                        devices.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="bg-blue-500 text-white py-16 px-4 dark:bg-blue-900">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-6">Get in Touch</h2>
+            <p class="text-lg mb-8">Have questions or need support? We’re here to help!</p>
+            <p class="text-lg mb-4">📞 Customer Service: <a href="tel:+1234567890" class="underline">+1 234 567 890</a></p>
+            <p class="text-lg">📧 Email: <a href="mailto:support@smartcontactmanager.com" class="underline">support@smartcontactmanager.com</a></p>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 py-4 text-center">
+        <p>&copy; 2024 Smart Contact Manager. All rights reserved.</p>
+    </footer>
+
+    </div>
+
+</body>
+
+</html>

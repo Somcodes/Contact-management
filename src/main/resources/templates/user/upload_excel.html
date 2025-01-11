@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: parent(~{::#content}, ~{::title}, ~{::script})}">
+
+<head>
+    <title>Upload Contacts</title>
+</head>
+
+<body>
+    <div id="content">
+
+        <!-- sidebar -->
+
+        <!-- is user is logged in : sidebar -->
+        <div th:if="${loggedInUser}">
+            <div th:replace="~{user/sidebar :: sidebar}"></div>
+        </div>
+        <div class="sm:pl-64 pt-16 mt-7">
+
+            <div class="grid grid-cols-12">
+                <div class="col-span-3 "></div>
+                <div class="col-span-12 md:col-span-5 ">
+                    <div
+                        class="card block  p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-800">
+                        <div data-th-replace="~{message::messagebox}"></div>
+                        <h1 class="text-3xl font-bold">Upload Contact File</h1>
+                        <p class="text-gray-500">No need to add contact one by one, upload your excel file and mention
+                            the heading name of respective columns below....
+                        </p>
+                        <form action="" class="mt-8" data-th-action="@{'/user/contacts/processexcel'}"
+                            data-th-object="${uploadForm}" method="post" enctype="multipart/form-data">
+                            <!-- name form  -->
+                            <div class="mb-3">
+                                <label for="input-group-1"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    Name Column
+                                </label>
+                                <div class="relative mb-1">
+
+                                    <input data-th-field="*{name}" type="text"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+
+                                </div>
+                                <p data-th-if="${#fields.hasErrors('name')}" data-th-errors="*{name}"
+                                    class="text-red-600 py-2 px-1"></p>
+                            </div>
+
+                            <!-- email form -->
+                            <div class="mb-3">
+                                <label for="input-group-1"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    Email Column
+                                </label>
+                                <div class="relative mb-1">
+
+                                    <input type="text" data-th-field="*{email}"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                </div>
+                                <p data-th-if="${#fields.hasErrors('email')}" data-th-errors="*{email}"
+                                    class="text-red-600 py-2 px-1"></p>
+                            </div>
+
+                            <!-- Phone number -->
+                            <div class="mb-3">
+                                <label for="input-group-1"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    Number Column
+                                </label>
+                                <div class="relative mb-1">
+
+                                    <input type="text" data-th-field="*{phoneNumber}"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                </div>
+                                <p data-th-if="${#fields.hasErrors('phoneNumber')}" data-th-errors="*{phoneNumber}"
+                                    class="text-red-600 py-2 px-1"></p>
+                            </div>
+
+                            <!-- address -->
+                            <div class="mb-3">
+
+                                <label for="message"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    Address Column</label>
+                                <input type="text" data-th-field="*{address}"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                                <p data-th-if="${#fields.hasErrors('address')}" data-th-errors="*{address}"
+                                    class="text-red-600 py-2 px-1"></p>
+                            </div>
+
+                            <!-- description -->
+                            <div class="mb-3">
+
+                                <label for="message"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    Description Column</label>
+                                <input type="text" data-th-field="*{description}"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                            </div>
+
+                            <div class="mb-3">
+
+                                <label for="message"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    Website Link Column</label>
+                                <input type="text" data-th-field="*{websiteLink}"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                            </div>
+
+                            <div class="mb-3">
+
+                                <label for="message"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                    LinkedIn Link Column</label>
+                                <input type="text" data-th-field="*{linkedInLink}"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                            </div>
+
+
+
+
+
+                            <!-- Excel File input -->
+                            <div class="mb-3">
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                    for="large_size">Excel File</label>
+                                <input
+                                    class="block w-full  text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                    data-th-field="*{excelFile}" type="file" />
+                                <p data-th-if="${#fields.hasErrors('excelFile')}" data-th-errors="*{excelFile}"
+                                    class="text-red-600 py-2 px-1"></p>
+
+                                <img class="max-h-52 mx-auto rounded-lg shadow m-3" src="" id="upload_image_preview"
+                                    alt="">
+                            </div>
+
+
+
+                            <div class="button-container text-center">
+                                <button type="submit"
+                                    class="px-3 py-2 rounded bg-black dark:bg-blue-600 hover:dark:bg-blue-700 text-white">
+                                    Upload
+                                </button>
+
+                                <button type="reset"
+                                    class="px-3 py-2 rounded bg-black dark:bg-blue-600 hover:dark:bg-blue-700 text-white">
+                                    Reset
+                                </button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script data-th-src="@{'/js/admin.js'}"></script>
+    <script>
+        console.log("This is Profile page");
+    </script>
+</body>
+
+</html>

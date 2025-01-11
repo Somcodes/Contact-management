@@ -1,0 +1,63 @@
+<div data-th-fragment="contact">
+
+  
+  <!-- Main modal -->
+  <div id="view_contact_modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+      <div class="relative p-4 w-full max-w-xl max-h-full">
+          <!-- Modal content -->
+          <div class="relative bg-gray-100 rounded-lg shadow dark:bg-gray-700">
+              <!-- Modal header -->
+              <div class="items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                  <div>
+                    <img onerror="this.src='https://thumbs.dreamstime.com/b/default-avatar-profile-flat-icon-vector-contact-symbol-illustration-184752213.jpg'" 
+                    id="contact_image" class="max-h-40 justify-center mx-auto mb-2 rounded-full"
+                    
+                    alt="">
+                    <h3 id="contact_name" class="text-2xl mb-4 text-center font-semibold text-gray-900 dark:text-white">
+                    </h3>
+                    <p class="text-center text-lg mb-2 font-semibold">Contact information</p>
+                    <div class="flex mb-2 justify-center">
+                      <i class="fa-solid mt-1 mr-3 fa-phone"></i>
+                      <p>+91-</p>
+                      <p id="number"></p>
+                    </div>
+                    <div class="flex mb-4 justify-center">
+                      <i class="fa-solid mt-1 mr-3 fa-envelope"></i>
+                      <p id="contact_email"></p>
+                    </div>
+                    <p class="text-center text-lg mb-2 font-semibold">Home Address</p>
+                    <div class="flex mb-4 justify-center">
+                      <i class="fa-solid mt-1 mr-3 fa-location-dot"></i>
+                      <p id="contact_address"></p>
+                    </div>
+                    <div class="flex mb-2 justify-center">
+                      <i class="fa-solid mt-1 mr-3 fa-globe"></i>
+                      <p id="contact_website"></p>
+                    </div>
+                    <div class="flex mb-4 justify-center">
+                      <i class="fa-brands mt-1 mr-3 fa-linkedin"></i>
+                      <p id="contact_linkedIn"></p>
+                    </div>
+                    <p class="text-center text-lg mb-2 font-semibold">Description</p>
+                    <p id="contact_des" class="text-center mb-5"></p>
+                    <div class="flex justify-center">
+                      <button onclick="closeContactModal()" data-modal-hide="default-modal" type="button" class="flex justify-center py-2.5 px-5 ms-3 text-sm bg-blue-700 font-medium focus:outline-none text-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                        Close</button>
+                      <a th:href="@{'/user/contacts/sendemail'}" class="flex justify-center py-2.5 px-5 ms-3 text-sm bg-green-700 font-medium focus:outline-none text-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" >
+                        <i class="fa-solid fa-envelope mt-1 mr-2"></i>
+                        Send Email
+                      </a>
+                    </div>
+                    
+                  </div>
+                  
+              </div>
+              <!-- Modal body -->
+              
+              <!-- Modal footer -->
+              
+          </div>
+      </div>
+  </div>
+  
+</div>
